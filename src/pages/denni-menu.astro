@@ -1,0 +1,123 @@
+---
+import Layout from "@components/Layout.astro";
+import { siteConfig } from "@data/profile";
+import { getCollection } from "astro:content";
+
+const dailyMenus = await getCollection("daily-menu");
+const sortedMenus = dailyMenus
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const pageDescription = `Denní menu ${siteConfig.name} — aktuální polední nabídka včetně polévky a hlavních jídel.`;
+---
+
+<Layout
+  title="Denní menu"
+  description={pageDescription}
+  canonical="/denni-menu/"
+>
+  <section class="section-padding relative overflow-hidden bg-organic">
+    <div class="bg-blob-left"></div>
+    <div class="section-container relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-terracotta font-medium text-sm uppercase tracking-widest">
+          Polední nabídka
+        </span>
+        <h1 class="text-3xl md:text-5xl font-heading font-bold text-warm-brown mt-3">
+          Denní menu
+        </h1>
+        <p class="text-warm-brown/70 mt-4 max-w-lg mx-auto">
+          Každý všední den pro vás připravujeme čerstvé polední menu. Podívejte
+          se, co jsme pro vás dnes nachystali.
+        </p>
+      </div>
+
+      {sortedMenus.length === 0 ? (
+        <div class="text-center text-warm-brown/50 py-20">
+          <p class="text-lg">Pro dnešek zatím nebylo vloženo denní menu.</p>
+          <p class="mt-2">Stavte se prosím později nebo nás kontaktujte.</p>
+        </div>
+      ) : (
+        <div class="space-y-8">
+          {sortedMenus.map((menu) => (
+            <div class="card max-w-2xl mx-auto">
+              <div class="flex items-center justify-between mb-6">
+                <h2 class="font-heading text-xl font-semibold text-warm-brown">
+                  {menu.data.date.toLocaleDateString("cs-CZ", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </h2>
+                <span class="text-xs bg-terracotta-light text-terracotta-dark px-3 py-1 rounded-full font-medium">
+                  {new Date().toDateString() === menu.data.date.toDateString() ? "Dnes" : "Archiv"}
+                </span>
+              </div>
+
+              <!-- Soup -->
+              <div class="mb-6">
+                <span class="text-xs uppercase tracking-widest text-olive font-medium">
+                  Polévka
+                </span>
+                <p class="text-lg font-medium text-warm-brown mt-1">
+                  {menu.data.soup}
+                </p>
+              </div>
+
+              <!-- Main dishes -->
+              <div>
+                <span class="text-xs uppercase tracking-widest text-olive font-medium">
+                  Hlavní jídla
+                </span>
+                <ul class="mt-3 divide-y divide-cream-dark">
+                  {menu.data.mainDishes.map((dish) => (
+                    <li class="flex justify-between items-start py-3 gap-4">
+                      <div>
+                        <p class="font-medium text-warm-brown">{dish.name}</p>
+                        {dish.allergens && (
+                          <p class="text-xs text-warm-brown/40 mt-0.5">
+                            Alergeny: {dish.allergens}
+                          </p>
+                        )}
+                      </div>
+                      <span class="font-semibold text-terracotta whitespace-nowrap">
+                        {dish.price} Kč
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <!-- Allergen Legend -->
+      <div class="max-w-2xl mx-auto mt-12 text-xs text-warm-brown/40 space-y-1">
+        <p class="font-medium text-warm-brown/50">Legenda alergenů:</p>
+        <p>
+          1 — Obiloviny obsahující lepek, 3 — Vejce, 4 — Ryby, 7 — Mléko,
+          9 — Celer
+        </p>
+        <p class="mt-2 italic">
+          Změna jídelníčku vyhrazena. Ceny jsou uvedeny v Kč.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+<task_progress>
+- [x] Read work.txt for task description
+- [x] Explore existing project structure
+- [x] Scaffold Astro project with all dependencies
+- [x] Create configuration files (tsconfig, prettier, eslint, editorconfig, .nvmrc)
+- [x] Set up security headers and deployment configs (netlify.toml, vercel.json, _headers)
+- [x] Create src/data/profile.ts and src/content collections
+- [ ] Create all pages (Home, Daily Menu, Menu, Privacy Policy, 404)
+- [ ] Set up Decap CMS (public/admin/)
+- [ ] Set up components (navigation, footer, SEO, layout, etc.)
+- [ ] Create scripts/pre-launch-check.sh, README.md, ARCHITECTURE.md, AUDIT.md
+- [ ] Install dependencies and build
+- [ ] Git commits
+</task_progress>
+</write_to_file>

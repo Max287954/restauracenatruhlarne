@@ -1,0 +1,216 @@
+---
+import Layout from "@components/Layout.astro";
+import { siteConfig } from "@data/profile";
+
+const pageDescription = `${siteConfig.name} v Habartově — poctivá česká kuchyně, denní menu a příjemné posezení. Otevřeno každý den.`;
+---
+
+<Layout
+  title="Domů"
+  description={pageDescription}
+  canonical="/"
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-organic min-h-[85vh] flex items-center">
+    <div class="bg-blob-left"></div>
+    <div class="bg-blob-right"></div>
+    <div class="section-container relative z-10 py-20 md:py-32 w-full">
+      <div class="max-w-3xl mx-auto text-center">
+        <span class="inline-block text-terracotta font-medium text-sm uppercase tracking-widest mb-4">
+          Vítejte v Habartově
+        </span>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-warm-brown leading-tight mb-6">
+          Restaurace<br class="sm:hidden" /> Na Truhlárně
+        </h1>
+        <p class="text-lg md:text-xl text-warm-brown/70 max-w-xl mx-auto mb-10 leading-relaxed">
+          Poctivá česká kuchyně, čepované pivo a příjemné posezení v srdci
+          Habartova. Vaříme s láskou z čerstvých surovin každý den.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/denni-menu/" class="btn-primary text-lg">
+            Dnešní denní menu
+          </a>
+          <a href="/jidelnistek/" class="btn-secondary text-lg">
+            Jídelní lístek
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section-padding relative overflow-hidden" id="o-nas">
+    <div class="bg-blob-right" style="top: 10%; left: auto; right: -5%"></div>
+    <div class="section-container relative z-10">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-olive font-medium text-sm uppercase tracking-widest">
+            O nás
+          </span>
+          <h2 class="text-3xl md:text-4xl font-heading font-bold text-warm-brown mt-3 mb-6">
+            Vítejte u nás
+          </h2>
+          <p class="text-warm-brown/70 leading-relaxed mb-4">
+            Restaurace Na Truhlárně je místo, kde se setkává tradice s moderním
+            přístupem ke gastronomii. Majitel a šéfkuchař Jaroslav Šindelář se
+            svým týmem denně připravuje poctivá jídla z čerstvých, převážně
+            lokálních surovin.
+          </p>
+          <p class="text-warm-brown/70 leading-relaxed mb-4">
+            Naše kuchyně staví na osvědčených českých recepturách, které
+            doplňujeme sezónními specialitami. Vždy u nás najdete širokou
+            nabídku hotových jídel, denní menu a perfektně ošetřené pivo.
+          </p>
+          <p class="text-warm-brown/70 leading-relaxed">
+            Ať už se stavíte na oběd, večeři, nebo jen na pivo s přáteli, u nás
+            se budete cítit jako doma.
+          </p>
+        </div>
+        <div class="relative">
+          <div
+            class="aspect-[4/3] rounded-2xl bg-cream-dark border border-cream-dark flex items-center justify-center overflow-hidden"
+          >
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 80 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="text-warm-brown/25"
+              aria-hidden="true"
+            >
+              <circle
+                cx="40"
+                cy="40"
+                r="38"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M24 48C24 48 28 32 40 32C52 32 56 48 56 48"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M28 40L36 32"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M52 40L44 32"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opening Hours -->
+  <section class="section-padding bg-cream-dark/50 relative" id="oteviraci-doba">
+    <div class="section-container relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-terracotta font-medium text-sm uppercase tracking-widest">
+          Kdy máme otevřeno
+        </span>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-warm-brown mt-3">
+          Otevírací doba
+        </h2>
+      </div>
+      <div class="max-w-md mx-auto">
+        <div class="card">
+          <ul class="divide-y divide-cream-dark" role="list">
+            {Object.entries(siteConfig.openingHours).map(([key, day]) => {
+              const today = new Date()
+                .toLocaleDateString("cs-CZ", { weekday: "long" })
+                .toLowerCase();
+              const isToday = day.label.toLowerCase() === today;
+              return (
+                <li
+                  class={`flex justify-between items-center py-3 px-2 ${
+                    isToday ? "bg-terracotta-light/20 -mx-2 px-4 rounded-lg" : ""
+                  }`}
+                >
+                  <span
+                    class={`font-medium ${isToday ? "text-terracotta-dark font-semibold" : "text-warm-brown"}`}
+                  >
+                    {day.label}
+                    {isToday && (
+                      <span class="ml-2 text-xs bg-terracotta text-white px-2 py-0.5 rounded-full">
+                        Dnes
+                      </span>
+                    )}
+                  </span>
+                  <span class="text-warm-brown/70">
+                    {day.open} – {day.close}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps & Contact -->
+  <section class="section-padding relative overflow-hidden" id="kontakt">
+    <div class="bg-blob-left"></div>
+    <div class="section-container relative z-10">
+      <div class="text-center mb-12">
+        <span class="text-olive font-medium text-sm uppercase tracking-widest">
+          Kde nás najdete
+        </span>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold text-warm-brown mt-3">
+          Kontakt a mapa
+        </h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="card space-y-4">
+          <h3 class="font-heading text-xl font-semibold text-warm-brown">
+            {siteConfig.name}
+          </h3>
+          <address class="not-italic text-warm-brown/70 space-y-1">
+            <p>{siteConfig.address.street}</p>
+            <p>{siteConfig.address.postalCode} {siteConfig.address.city}</p>
+          </address>
+          <p>
+            <a
+              href={`mailto:${siteConfig.owner.email}`}
+              class="text-terracotta hover:text-terracotta-dark underline underline-offset-2 transition-colors"
+            >
+              {siteConfig.owner.email}
+            </a>
+          </p>
+          <div>
+            <h4 class="font-medium text-warm-brown mb-1">Otevírací doba</h4>
+            <ul class="text-sm text-warm-brown/70 space-y-0.5">
+              {Object.entries(siteConfig.openingHours).map(([_, day]) => (
+                <li>
+                  {day.label}: {day.open}–{day.close}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-md h-[350px] md:h-full min-h-[350px]">
+          <iframe
+            title="Restaurace Na Truhlárně — mapa"
+            src={siteConfig.googleMapsEmbedUrl}
+            width="100%"
+            height="100%"
+            style="border:0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,57 @@
+---
+import BaseHead from "./BaseHead.astro";
+import Nav from "./Nav.astro";
+import Footer from "./Footer.astro";
+
+import "@styles/global.css";
+
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+  noindex?: boolean;
+  containerClass?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage,
+  canonical,
+  noindex = false,
+  containerClass = "",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="cs">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      canonical={canonical}
+      noindex={noindex}
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-cream">
+    <!-- Skip to main content -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]
+             focus:px-4 focus:py-2 focus:bg-terracotta focus:text-white focus:rounded-lg
+             focus:outline-none focus:ring-2 focus:ring-terracotta focus:ring-offset-2"
+    >
+      Přeskočit na hlavní obsah
+    </a>
+
+    <Nav />
+
+    <main id="main-content" class="flex-1 {containerClass}">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

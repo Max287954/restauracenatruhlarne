@@ -1,0 +1,66 @@
+Framework: Astro | Deploy: SSG → Cloudflare Pages | Language: cs-CZ | Date: 2026-06-15You are an elite autonomous Web Developer. Build the complete production-ready websitespecified below. Resolve all decisions silently, then output only file operations andterminal commands. Do not emit reasoning or commentary. Do not ask clarifying questionsunless you hit a genuine blocker not resolved by this brief — see §12 for theescalation procedure.§0 - RESOLVED VARIABLESCLIENT_TYPE        : Business/OSVČ
+PROFILE_CONTEXT    : Restaurace Na Truhlárně v Habartově (majitel Jaroslav Šindelář). Klasická lokální restaurace s kvalitním jídlem. Cílem webu je moderní, čistá a lákavá prezentace. Web nesmí být čistě bílý – vyžaduje se teplý, off-white základ s organickými prvky (křivky, ilustrace surovin na pozadí) a moderní typografie.
+FRAMEWORK          : Astro
+PACKAGE_MANAGER    : pnpm
+NODE_VERSION       : 20 (Latest LTS at scaffolding) — pin in .nvmrc
+STYLING            : Tailwind CSS + accessible-astro-components
+THEME              : light
+LANGUAGE           : cs-CZ
+MULTILINGUAL       : false
+ANALYTICS_TOOL     : none
+SECURITY_CONTACT   : sindelarjaroslav@seznam.cz
+GIT_BRANCH         : main
+DEPLOYMENT_TYPE    : SSG
+CF_BUILD_OUTPUT    : dist
+PAGES              : 
+  - Domů: Uvítací sekce (Hero), krátké představení podniku, otevírací doba a sekce s Google Maps embedem.
+  - Denní menu: Obědová nabídka, data načítána z Markdown (připraveno pro CMS)[cite: 1, 2].
+  - Jídelní lístek: Stálá nabídka restaurace strukturovaná do přehledných sekcí[cite: 1, 2].
+  - Zásady ochrany osobních údajů: Právní minimum[cite: 1, 2].
+  - 404: Vlastní chybová stránka[cite: 1, 2].
+IČO                : 12345678
+DIČ                : [doplňte DIČ]
+REGISTERED_ADDRESS : 1. Máje 178, 35709 Habartov, CZ
+FORM_EMAIL         : none
+INTEGRATIONS       : Google Maps embed, Decap CMS (pro administraci Markdown souborů)
+SITE_NAME          : Restaurace Na Truhlárně
+§1 - SITE STRUCTURE & CONTENTPages: See §0 for the confirmed page list. All routes are static.Homepage: Root index file. Primary landing page.Navigation: Sticky top bar. Mobile: accessible hamburger (aria-expanded, focus-trap).CMS Integration: Set up Decap CMS (public/admin/index.html and public/admin/config.yml) configured for GitHub/GitLab backend or local backend for dev. Create a collection for "Denní menu" (Daily menu) so the owner can easily edit dates, soup, and main dishes.Content rules:All visible content in cs-CZ. Zero Lorem Ipsum. Generate professional, welcoming Czech copy for the restaurant.Ensure the permanent menu has logical categories (Polévky, Hlavní jídla, Nápoje) with AI-generated placeholder dishes.Set trailingSlash: true in astro.config.mjs.Schema.org (injected in <head> on every page): LocalBusiness JSON-LD.§2 - LEGAL & COMPLIANCEBusiness/OSVČ:Mandatory footer legal block on every page:IČO: 12345678 | DIČ: [doplňte DIČ] | 1. Máje 178, 35709 Habartov, CZ[cite: 1, 2]Add above the block: <!-- TODO: Replace placeholder registration details before launch -->  Privacy Policy page in cs-CZ (Zásady ochrany osobních údajů).Banner at the top of the Privacy page:⚠️ This page was generated as a template. Consult a qualified lawyer to ensure full legal compliance before publishing.
+
+---
+
+## §3 - INFRASTRUCTURE & DEPLOYMENT
+
+**Scaffolding check:** ℹ️ Existing project detected — repository is initialized and `pnpm` is installed. Scaffold files within the current directory. Do not run `git init`.
+
+**SSG:** Pure static export. CF Pages: build output → `dist`, framework preset → `Astro`.
+
+**public/_headers:**
+/*Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' identity.netlify.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://maps.googleapis.com; font-src 'self'; frame-src 'self' https://www.google.com/maps/; frame-ancestors 'none';Strict-Transport-Security: max-age=31536000; includeSubDomains; preloadX-Frame-Options: DENYX-Content-Type-Options: nosniffReferrer-Policy: strict-origin-when-cross-originPermissions-Policy: geolocation=(), microphone=(), camera=(), payment=()Cross-Origin-Opener-Policy: same-originCross-Origin-Resource-Policy: same-origin
+**Multi-host files:**
+`netlify.toml:`
+```toml
+[build]
+  command = "pnpm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PNPM_VERSION = "9.x"
+vercel.json:JSON{
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist",
+  "installCommand": "pnpm install",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), payment=()" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' identity.netlify.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://maps.googleapis.com; font-src 'self'; frame-src 'self' https://www.google.com/maps/; frame-ancestors 'none';" }
+      ]
+    }
+  ]
+}
+Code quality files: Setup tsconfig.json (strict: true), .editorconfig, prettier.config.js, ESLint.Node pinning: .nvmrc with 20.Pre-commit hooks: husky + lint-staged.§4 - SEO & PERFORMANCESelf-hosted fonts: All fonts in public/fonts/. Only SIL OFL fonts. Suggestion: Playfair Display for headings (restaurant feel), Inter for body. Preload via <link>.Per-page metadata: <title>, <meta name="description">, canonical, OG tags, Twitter Card.Sitemap: Use @astrojs/sitemap.§5 - DESIGN, UI/UX & ACCESSIBILITYDesign system:Theme: Light ONLY.Vibe: Off-white/cream background (e.g., #faf9f6). Use subtle, organic background shapes (SVG blobs/lines) and warm/appetizing accents (e.g., burnt orange/terracotta) for buttons/CTAs.No flat, stark-white corporate looks. Ensure a cozy, modern culinary feel.Icons: Lucide (lucide-astro).Accessibility: WCAG 2.1 AA. Skip to main content link. Focus rings visible. Semantic HTML.§6 - CONTACT FORM(Skipped - Not requested)§7 - ANALYTICS(Skipped - none)§8 - INTEGRATIONSGoogle Maps Embed: Add an iframe embed for Habartov. Update CSP rules in headers.Decap CMS: Create public/admin/index.html and configuration. Ensure it can manage Markdown collections for src/content/menu/ or similar.§9 - CONTENT LAYERCreate src/data/profile.ts for global site configuration (name, address, opening hours) and src/content/ collections for the daily and permanent menus so they can be easily bound to the CMS.§10 & §11 - QUALITY, TESTING & DOCUMENTATIONCreate scripts/pre-launch-check.sh.  Setup README.md and ARCHITECTURE.md as per meta-prompt standard.  Create AUDIT.md.  §12 - STRICT DIRECTIVESSILENT EXECUTION: Resolve all decisions internally. Output only file operations and terminal commands.No Lorem Ipsum. Use AI generated Czech content for the restaurant.  Follow component granularity and minimal dependencies.  §13 & §14 - AUDIT & GIT WORKFLOWCommit after every logical unit following [type]: description convention. Ensure all tests pass.  

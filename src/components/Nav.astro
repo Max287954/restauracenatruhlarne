@@ -1,0 +1,168 @@
+---
+import { siteConfig } from "@data/profile";
+
+const navLinks = [
+  { href: "/", label: "Domů" },
+  { href: "/denni-menu/", label: "Denní menu" },
+  { href: "/jidelnistek/", label: "Jídelní lístek" },
+];
+---
+
+<header class="sticky top-0 z-50 bg-cream/80 backdrop-blur-md border-b border-cream-dark">
+  <nav
+    class="section-container flex items-center justify-between h-16 lg:h-20"
+    aria-label="Hlavní navigace"
+  >
+    <!-- Logo -->
+    <a
+      href="/"
+      class="flex items-center gap-2 text-warm-brown hover:text-terracotta transition-colors no-underline"
+    >
+      <svg
+        width="36"
+        height="36"
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="2" />
+        <path
+          d="M10 22C10 22 12 14 18 14C24 14 26 22 26 22"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <path
+          d="M12 18L16 14"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <path
+          d="M24 18L20 14"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+      <span class="font-heading text-lg font-semibold hidden sm:block">
+        {siteConfig.name}
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-8" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-sm font-medium text-warm-brown hover:text-terracotta transition-colors uppercase tracking-wide
+                   aria-[current]:text-terracotta aria-[current]:font-semibold"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a href="/#kontakt" class="btn-primary text-sm">
+          Kontakt
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden p-2 text-warm-brown hover:text-terracotta transition-colors rounded-lg"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Otevřít menu"
+    >
+      <svg
+        id="hamburger-icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <line x1="4" y1="6" x2="20" y2="6" />
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <line x1="4" y1="18" x2="20" y2="18" />
+      </svg>
+      <svg
+        id="close-icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        class="hidden"
+        aria-hidden="true"
+      >
+        <line x1="6" y1="6" x2="18" y2="18" />
+        <line x1="18" y1="6" x2="6" y2="18" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-cream border-b border-cream-dark"
+  >
+    <ul class="section-container py-4 flex flex-col gap-3" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="block py-2 text-base font-medium text-warm-brown hover:text-terracotta transition-colors"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a href="/#kontakt" class="btn-primary text-sm w-full text-center mt-2">
+          Kontakt
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("mobile-menu-toggle") as HTMLButtonElement | null;
+  const menu = document.getElementById("mobile-menu") as HTMLDivElement | null;
+  const hamburger = document.getElementById("hamburger-icon") as HTMLElement | null;
+  const closeIcon = document.getElementById("close-icon") as HTMLElement | null;
+
+  if (toggle && menu && hamburger && closeIcon) {
+    toggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("hidden");
+      const expanded = !isOpen;
+      toggle.setAttribute("aria-expanded", String(expanded));
+      toggle.setAttribute("aria-label", expanded ? "Zavřít menu" : "Otevřít menu");
+      hamburger.classList.toggle("hidden", expanded);
+      closeIcon.classList.toggle("hidden", !expanded);
+    });
+
+    // Close on escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+        menu.classList.add("hidden");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Otevřít menu");
+        hamburger.classList.remove("hidden");
+        closeIcon.classList.add("hidden");
+        toggle.focus();
+      }
+    });
+  }
+</script>

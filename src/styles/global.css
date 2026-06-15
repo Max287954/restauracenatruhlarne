@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #faf9f6;
+  --color-cream-dark: #f0ede6;
+  --color-terracotta: #c67a4a;
+  --color-terracotta-dark: #a85d30;
+  --color-terracotta-light: #e8c4a8;
+  --color-warm-brown: #5c3d2e;
+  --color-warm-brown-dark: #3d2518;
+  --color-olive: #7d8a5e;
+  --color-olive-light: #a8b48a;
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-body);
+    @apply bg-cream text-warm-brown;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    @apply font-semibold;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-terracotta rounded;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-terracotta text-white font-semibold rounded-lg
+      hover:bg-terracotta-dark focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2
+      transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-terracotta text-terracotta
+      font-semibold rounded-lg hover:bg-terracotta hover:text-white focus-visible:ring-2
+      focus-visible:ring-terracotta focus-visible:ring-offset-2 transition-colors duration-200;
+  }
+
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .card {
+    @apply bg-white/70 backdrop-blur-sm rounded-2xl shadow-md border border-cream-dark p-6;
+  }
+}
+
+/* Background blobs/shapes */
+.bg-organic {
+  position: relative;
+}
+
+.bg-organic::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, rgba(198, 122, 74, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-blob-left {
+  position: absolute;
+  top: 20%;
+  left: -8%;
+  width: 35%;
+  height: 50%;
+  background: radial-gradient(ellipse at center, rgba(125, 138, 94, 0.06) 0%, transparent 70%);
+  border-radius: 60% 40% 50% 45%;
+  pointer-events: none;
+}
+
+.bg-blob-right {
+  position: absolute;
+  bottom: 10%;
+  right: -6%;
+  width: 30%;
+  height: 45%;
+  background: radial-gradient(ellipse at center, rgba(198, 122, 74, 0.06) 0%, transparent 70%);
+  border-radius: 45% 55% 40% 60%;
+  pointer-events: none;
+}

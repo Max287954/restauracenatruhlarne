@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main
+  repo: Max287954/restauracenatruhlarne
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: "cs"
+
+collections:
+  - name: "daily-menu"
+    label: "Denní menu"
+    folder: "src/content/daily-menu"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}"
+    fields:
+      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Polévka", name: "soup", widget: "string" }
+      - label: "Hlavní jídla"
+        name: "mainDishes"
+        widget: "list"
+        fields:
+          - { label: "Název jídla", name: "name", widget: "string" }
+          - { label: "Cena (Kč)", name: "price", widget: "number", value_type: "int" }
+          - { label: "Alergeny", name: "allergens", widget: "string", required: false }
+
+  - name: "menu"
+    label: "Jídelní lístek"
+    folder: "src/content/menu"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Kategorie", name: "category", widget: "select", options: ["polevky", "hlavni-jidla", "dezerty", "napoje"] }
+      - { label: "Název", name: "name", widget: "string" }
+      - { label: "Popis", name: "description", widget: "text", required: false }
+      - { label: "Cena (Kč)", name: "price", widget: "number", value_type: "int" }
+      - { label: "Alergeny", name: "allergens", widget: "string", required: false }
+      - { label: "Pořadí", name: "order", widget: "number", default: 0, value_type: "int" }
+
+site_url: "https://restauracenatruhlarne.cz"
+display_url: "https://restauracenatruhlarne.cz"
+logo_url: "https://restauracenatruhlarne.cz/favicon.svg"

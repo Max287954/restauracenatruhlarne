@@ -1,0 +1,29 @@
+---
+import Layout from "@components/Layout.astro";
+---
+
+<Layout
+  title="Stránka nenalezena"
+  description="Požadovaná stránka nebyla nalezena."
+  noindex
+>
+  <section class="section-padding relative overflow-hidden bg-organic min-h-[70vh] flex items-center">
+    <div class="bg-blob-left"></div>
+    <div class="bg-blob-right"></div>
+    <div class="section-container relative z-10 text-center">
+      <span class="text-8xl md:text-9xl font-heading font-bold text-terracotta-light/40 block leading-none">
+        404
+      </span>
+      <h1 class="text-3xl md:text-4xl font-heading font-bold text-warm-brown mt-4 mb-4">
+        Stránka nenalezena
+      </h1>
+      <p class="text-warm-brown/70 max-w-md mx-auto mb-8 text-lg">
+        Omlouváme se, ale požadovaná stránka neexistuje. Možná byla
+        přesunuta, nebo jste zadali nesprávnou adresu.
+      </p>
+      <a href="/" class="btn-primary text-lg">
+        Zpět na hlavní stránku
+      </a>
+    </div>
+  </section>
+</Layout>

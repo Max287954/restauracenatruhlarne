@@ -1,0 +1,131 @@
+---
+import Layout from "@components/Layout.astro";
+import { siteConfig } from "@data/profile";
+
+const pageDescription = `Zásady ochrany osobních údajů ${siteConfig.name} — informace o zpracování osobních údajů dle nařízení GDPR.`;
+---
+
+<Layout
+  title="Zásady ochrany osobních údajů"
+  description={pageDescription}
+  canonical="/zasady-ochrany-osobnich-udaju/"
+>
+  <section class="section-padding relative overflow-hidden">
+    <div class="section-container relative z-10 max-w-3xl">
+      <!-- Warning Banner -->
+      <div class="bg-yellow-50 border border-yellow-300 rounded-xl p-4 mb-10 text-sm text-yellow-800">
+        <p class="font-semibold mb-1">⚠️ Důležité upozornění</p>
+        <p>
+          Tato stránka byla vygenerována jako šablona. Pro zajištění plné právní
+          souladu konzultujte prosím kvalifikovaného právníka.
+        </p>
+      </div>
+
+      <h1 class="text-3xl md:text-4xl font-heading font-bold text-warm-brown mb-8">
+        Zásady ochrany osobních údajů
+      </h1>
+
+      <div class="prose prose-warm max-w-none text-warm-brown/70">
+        <section class="mb-8">
+          <h2 class="font-heading text-xl font-semibold text-warm-brown mb-3">
+            1. Správce osobních údajů
+          </h2>
+          <p>
+            Správcem osobních údajů je:
+          </p>
+          <address class="not-italic my-2 p-4 bg-cream-dark/50 rounded-lg">
+            <strong>{siteConfig.owner.name}</strong><br />
+            IČO: {siteConfig.owner.ico}<br />
+            {siteConfig.owner.registeredAddress}<br />
+            E-mail:{" "}
+            <a
+              href={`mailto:${siteConfig.owner.email}`}
+              class="text-terracotta hover:text-terracotta-dark underline"
+            >
+              {siteConfig.owner.email}
+            </a>
+          </address>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="font-heading text-xl font-semibold text-warm-brown mb-3">
+            2. Jaké údaje zpracováváme
+          </h2>
+          <p>
+            Naše webové stránky {siteConfig.url} jsou statické a nesbírají žádné
+            osobní údaje návštěvníků. Nepoužíváme cookies, analytické nástroje ani
+            kontaktní formuláře.
+          </p>
+          <p class="mt-2">
+            Jediné osobní údaje, které můžeme zpracovávat, jsou ty, které nám
+            sami dobrovolně poskytnete při přímé komunikaci (například e-mailem
+            při rezervaci nebo dotazu).
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="font-heading text-xl font-semibold text-warm-brown mb-3">
+            3. Účel zpracování
+          </h2>
+          <p>
+            Osobní údaje zpracováváme výhradně za účelem:
+          </p>
+          <ul class="list-disc pl-6 space-y-1 mt-2">
+            <li>Vedení obchodní komunikace a vyřizování dotazů</li>
+            <li>Plnění případných smluvních závazků</li>
+            <li>Plnění zákonných povinností (např. účetnictví)</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="font-heading text-xl font-semibold text-warm-brown mb-3">
+            4. Doba uchování údajů
+          </h2>
+          <p>
+            Osobní údaje uchováváme pouze po dobu nezbytně nutnou k naplnění
+            účelu jejich zpracování, nejdéle však po dobu stanovenou příslušnými
+            právními předpisy.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="font-heading text-xl font-semibold text-warm-brown mb-3">
+            5. Vaše práva
+          </h2>
+          <p>
+            V souladu s platnými právními předpisy máte právo:
+          </p>
+          <ul class="list-disc pl-6 space-y-1 mt-2">
+            <li>Na přístup k osobním údajům</li>
+            <li>Na opravu nepřesných údajů</li>
+            <li>Na výmaz osobních údajů (právo být zapomenut)</li>
+            <li>Na omezení zpracování</li>
+            <li>Na přenositelnost údajů</li>
+            <li>Vznesení námitky proti zpracování</li>
+            <li>Podat stížnost u Úřadu pro ochranu osobních údajů</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="font-heading text-xl font-semibold text-warm-brown mb-3">
+            6. Kontakt
+          </h2>
+          <p>
+            Pro uplatnění vašich práv nebo jakékoli dotazy ohledně ochrany
+            osobních údajů nás kontaktujte na e-mailové adrese{" "}
+            <a
+              href={`mailto:${siteConfig.owner.email}`}
+              class="text-terracotta hover:text-terracotta-dark underline"
+            >
+              {siteConfig.owner.email}
+            </a>.
+          </p>
+        </section>
+
+        <p class="text-sm text-warm-brown/40 mt-12">
+          Poslední aktualizace: 15. června 2026
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

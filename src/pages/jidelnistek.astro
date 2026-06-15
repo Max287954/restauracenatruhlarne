@@ -1,0 +1,94 @@
+---
+import Layout from "@components/Layout.astro";
+import { siteConfig } from "@data/profile";
+import { getCollection } from "astro:content";
+
+const menuItems = await getCollection("menu");
+const sorted = menuItems.sort((a, b) => a.data.order - b.data.order);
+
+const categories = [
+  { key: "polevky", label: "Polévky", icon: "🍲" },
+  { key: "hlavni-jidla", label: "Hlavní jídla", icon: "🍽️" },
+  { key: "dezerty", label: "Dezerty", icon: "🍰" },
+  { key: "napoje", label: "Nápoje", icon: "🍺" },
+] as const;
+
+const pageDescription = `Jídelní lístek ${siteConfig.name} — stálá nabídka polévek, hlavních jídel, dezertů a nápojů.`;
+---
+
+<Layout
+  title="Jídelní lístek"
+  description={pageDescription}
+  canonical="/jidelnistek/"
+>
+  <section class="section-padding relative overflow-hidden bg-organic">
+    <div class="bg-blob-right"></div>
+    <div class="section-container relative z-10">
+      <div class="text-center mb-16">
+        <span class="text-terracotta font-medium text-sm uppercase tracking-widest">
+          Naše nabídka
+        </span>
+        <h1 class="text-3xl md:text-5xl font-heading font-bold text-warm-brown mt-3">
+          Jídelní lístek
+        </h1>
+        <p class="text-warm-brown/70 mt-4 max-w-lg mx-auto">
+          Objevte naši stálou nabídku poctivých jídel připravovaných z čerstvých
+          surovin s důrazem na tradiční českou kuchyni.
+        </p>
+      </div>
+
+      <div class="space-y-16">
+        {categories.map((cat) => {
+          const items = sorted.filter((item) => item.data.category === cat.key);
+          if (items.length === 0) return null;
+          return (
+            <div id={cat.key}>
+              <div class="flex items-center gap-3 mb-8">
+                <span class="text-3xl" aria-hidden="true">{cat.icon}</span>
+                <h2 class="font-heading text-2xl md:text-3xl font-semibold text-warm-brown">
+                  {cat.label}
+                </h2>
+              </div>
+              <div class="grid gap-4">
+                {items.map((item) => (
+                  <div class="card flex justify-between items-start gap-4">
+                    <div class="flex-1">
+                      <h3 class="font-semibold text-warm-brown text-lg">
+                        {item.data.name}
+                      </h3>
+                      {item.data.description && (
+                        <p class="text-warm-brown/60 text-sm mt-1 leading-relaxed">
+                          {item.data.description}
+                        </p>
+                      )}
+                      {item.data.allergens && (
+                        <p class="text-xs text-warm-brown/40 mt-2">
+                          Alergeny: {item.data.allergens}
+                        </p>
+                      )}
+                    </div>
+                    <span class="font-heading font-bold text-xl text-terracotta whitespace-nowrap">
+                      {item.data.price} Kč
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Allergen Legend -->
+      <div class="max-w-2xl mx-auto mt-16 text-xs text-warm-brown/40 space-y-1">
+        <p class="font-medium text-warm-brown/50">Legenda alergenů:</p>
+        <p>
+          1 — Obiloviny obsahující lepek, 3 — Vejce, 4 — Ryby, 7 — Mléko,
+          9 — Celer
+        </p>
+        <p class="mt-2 italic">
+          Změna jídelníčku vyhrazena. Ceny jsou uvedeny v Kč.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

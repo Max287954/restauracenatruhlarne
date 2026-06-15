@@ -13,7 +13,7 @@ locale: "cs"
 
 collections:
   - name: "weekly-menu"
-    label: "Týdenní menu"
+    label: "Správa menu (Týdenní)"
     folder: "src/content/weekly-menu"
     create: true
     slug: "{{slug}}"

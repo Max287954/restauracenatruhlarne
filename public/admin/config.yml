@@ -2,6 +2,7 @@ backend:
   name: github
   branch: main
   repo: Max287954/restauracenatruhlarne
+  base_url: https://restauracenatruhlarne.pages.dev
 
 local_backend: true
 

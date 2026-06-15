@@ -3,6 +3,8 @@ backend:
   branch: main
   repo: Max287954/restauracenatruhlarne
 
+local_backend: true
+
 media_folder: "public/images"
 public_folder: "/images"
 

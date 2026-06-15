@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .astro,.ts,.tsx",
     "format": "prettier --write .",
     "prepare": "husky",
-    "pre-launch-check": "bash scripts/pre-launch-check.sh"
+    "pre-launch-check": "bash scripts/pre-launch-check.sh",
+    "decap": "npx decap-server"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

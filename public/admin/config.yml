@@ -11,21 +11,26 @@ public_folder: "/images"
 locale: "cs"
 
 collections:
-  - name: "daily-menu"
-    label: "Denní menu"
-    folder: "src/content/daily-menu"
+  - name: "weekly-menu"
+    label: "Týdenní menu"
+    folder: "src/content/weekly-menu"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}"
+    slug: "{{slug}}"
     fields:
-      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Polévka", name: "soup", widget: "string" }
-      - label: "Hlavní jídla"
-        name: "mainDishes"
+      - { label: "Týden (např. 15.6. - 19.6.)", name: "title", widget: "string" }
+      - label: "Dny v týdnu"
+        name: "days"
         widget: "list"
         fields:
-          - { label: "Název jídla", name: "name", widget: "string" }
-          - { label: "Cena (Kč)", name: "price", widget: "number", value_type: "int" }
-          - { label: "Alergeny", name: "allergens", widget: "string", required: false }
+          - { label: "Den (např. Pondělí)", name: "day_name", widget: "string" }
+          - { label: "Polévka", name: "soup", widget: "string" }
+          - label: "Hlavní chody"
+            name: "mains"
+            widget: "list"
+            fields:
+              - { label: "Název jídla", name: "name", widget: "string" }
+              - { label: "Cena (Kč)", name: "price", widget: "number", value_type: "int" }
+              - { label: "Alergeny", name: "allergens", widget: "string", required: false }
 
   - name: "menu"
     label: "Jídelní lístek"

@@ -1,15 +1,20 @@
 import { defineCollection, z } from "astro:content";
 
-const dailyMenuCollection = defineCollection({
+const weeklyMenuCollection = defineCollection({
   type: "content",
   schema: z.object({
-    date: z.date(),
-    soup: z.string(),
-    mainDishes: z.array(
+    title: z.string(),
+    days: z.array(
       z.object({
-        name: z.string(),
-        price: z.number(),
-        allergens: z.string().optional(),
+        day_name: z.string(),
+        soup: z.string(),
+        mains: z.array(
+          z.object({
+            name: z.string(),
+            price: z.number(),
+            allergens: z.string().optional(),
+          }),
+        ),
       }),
     ),
   }),
@@ -28,6 +33,6 @@ const menuCollection = defineCollection({
 });
 
 export const collections = {
-  "daily-menu": dailyMenuCollection,
+  "weekly-menu": weeklyMenuCollection,
   menu: menuCollection,
 };

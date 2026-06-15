@@ -4,15 +4,14 @@ import { siteConfig } from "@data/profile";
 import { getCollection } from "astro:content";
 import BackgroundDoodles from "@components/BackgroundDoodles.astro";
 
-const dailyMenus = await getCollection("daily-menu");
-const sortedMenus = dailyMenus
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const weeklyMenus = await getCollection("weekly-menu");
+const latest = weeklyMenus.sort((a, b) => b.data.title.localeCompare(a.data.title))[0];
 
-const pageDescription = `Denní menu ${siteConfig.name} — aktuální polední nabídka včetně polévky a hlavních jídel.`;
+const pageDescription = `Týdenní menu ${siteConfig.name} — aktuální polední nabídka na celý týden včetně polévek a hlavních jídel.`;
 ---
 
 <Layout
-  title="Denní menu"
+  title="Týdenní menu"
   description={pageDescription}
   canonical="/denni-menu/"
 >
@@ -25,41 +24,37 @@ const pageDescription = `Denní menu ${siteConfig.name} — aktuální polední 
           Polední nabídka
         </span>
         <h1 class="text-3xl md:text-5xl font-heading font-bold text-warm-brown mt-3">
-          Denní menu
+          Týdenní menu
         </h1>
         <p class="text-warm-brown/70 mt-4 max-w-lg mx-auto">
           Každý všední den pro vás připravujeme čerstvé polední menu. Podívejte
-          se, co jsme pro vás dnes nachystali.
+          se, co jsme pro vás nachystali na celý týden.
         </p>
       </div>
 
-      {sortedMenus.length === 0 ? (
+      {!latest ? (
         <div class="text-center text-warm-brown/50 py-20">
-          <p class="text-lg">Pro dnešek zatím nebylo vloženo denní menu.</p>
+          <p class="text-lg">Pro tento týden zatím nebylo vloženo menu.</p>
           <p class="mt-2">Stavte se prosím později nebo nás kontaktujte.</p>
         </div>
       ) : (
-        <div class="space-y-10">
-          {sortedMenus.map((menu) => (
+        <div class="space-y-12">
+          <h2 class="font-heading text-2xl font-semibold text-warm-brown text-center">
+            {latest.data.title}
+          </h2>
+
+          {latest.data.days.map((day) => (
             <article class="card max-w-2xl mx-auto !p-0 overflow-hidden">
-              <!-- Header -->
-              <div class="flex items-center justify-between p-6 pb-4 border-b border-cream-dark/50">
-                <h2 class="font-heading text-xl font-semibold text-warm-brown">
-                  {menu.data.date.toLocaleDateString("cs-CZ", {
-                    weekday: "long",
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </h2>
-                <span class="text-xs bg-terracotta-light text-terracotta-dark px-3 py-1 rounded-full font-medium">
-                  {new Date().toDateString() === menu.data.date.toDateString() ? "Dnes" : "Archiv"}
+              <!-- Day Header -->
+              <div class="flex items-center gap-3 p-5 pb-4 border-b border-cream-dark/50 bg-[#f3f0e8]/40">
+                <span class="font-heading text-lg font-semibold text-warm-brown">
+                  {day.day_name}
                 </span>
               </div>
 
-              <div class="p-6 space-y-4">
+              <div class="p-5 md:p-6 space-y-4">
                 <!-- Soup -->
-                <div class="bg-[#f3f0e8]/40 rounded-xl p-5">
+                <div class="bg-[#f3f0e8]/30 rounded-xl p-4">
                   <span class="text-xs uppercase tracking-widest text-olive font-medium flex items-center gap-2">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
@@ -67,14 +62,14 @@ const pageDescription = `Denní menu ${siteConfig.name} — aktuální polední 
                     </svg>
                     Polévka
                   </span>
-                  <p class="text-lg font-medium text-warm-brown mt-2">
-                    {menu.data.soup}
+                  <p class="text-base font-medium text-warm-brown mt-2">
+                    {day.soup}
                   </p>
                 </div>
 
                 <!-- Main dishes -->
                 <div>
-                  <span class="text-xs uppercase tracking-widest text-olive font-medium flex items-center gap-2 mb-4">
+                  <span class="text-xs uppercase tracking-widest text-olive font-medium flex items-center gap-2 mb-3">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
                       <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
@@ -85,9 +80,9 @@ const pageDescription = `Denní menu ${siteConfig.name} — aktuální polední 
                     Hlavní jídla
                   </span>
                   <ul class="space-y-0">
-                    {menu.data.mainDishes.map((dish, idx) => (
+                    {day.mains.map((dish, idx) => (
                       <li
-                        class={`flex justify-between items-start p-5 gap-4 ${
+                        class={`flex justify-between items-start p-4 gap-4 ${
                           idx % 2 === 0 ? "bg-[#f3f0e8]/30" : "bg-white/40"
                         } rounded-xl`}
                       >
@@ -100,7 +95,7 @@ const pageDescription = `Denní menu ${siteConfig.name} — aktuální polední 
                           )}
                         </div>
                         <div class="flex items-center gap-3 shrink-0">
-                          <span class="hidden sm:block flex-1 border-b border-dotted border-stone-300 min-w-[3rem] self-center"></span>
+                          <span class="hidden sm:block flex-1 border-b border-dotted border-stone-300 min-w-[2rem] self-center"></span>
                           <span class="font-heading font-bold text-lg text-terracotta whitespace-nowrap">
                             {dish.price} Kč
                           </span>

@@ -18,7 +18,9 @@ const {
 } = Astro.props;
 
 const pageTitle = `${title} | ${siteConfig.name}`;
-const canonicalUrl = canonical ? new URL(canonical, siteConfig.url).href : new URL(Astro.url.pathname, siteConfig.url).href;
+const canonicalUrl = canonical
+  ? new URL(canonical, siteConfig.url).href
+  : new URL(Astro.url.pathname, siteConfig.url).href;
 ---
 
 <!-- Primary Meta -->
@@ -63,9 +65,24 @@ const canonicalUrl = canonical ? new URL(canonical, siteConfig.url).href : new U
     },
     "servesCuisine": "Czech",
     "openingHoursSpecification": [
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "11:00", "closes": "22:00" },
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "11:00", "closes": "23:00" },
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:00", "closes": "21:00" }
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "11:00",
+        "closes": "22:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday", "Saturday"],
+        "opens": "11:00",
+        "closes": "23:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "11:00",
+        "closes": "21:00"
+      }
     ]
   }
 </script>

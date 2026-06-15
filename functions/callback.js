@@ -8,21 +8,21 @@ export async function onRequest(context) {
     }
 
     const url = new URL(context.request.url);
-    const code = url.searchParams.get('code');
+    const code = url.searchParams.get("code");
 
     if (!code) {
       return new Response("Error: No code.", { status: 400 });
     }
 
     const params = new URLSearchParams();
-    params.append('client_id', client_id);
-    params.append('client_secret', client_secret);
-    params.append('code', code);
+    params.append("client_id", client_id);
+    params.append("client_secret", client_secret);
+    params.append("code", code);
 
-    const response = await fetch('https://github.com/login/oauth/access_token', {
-      method: 'POST',
+    const response = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
       headers: {
-        'Accept': 'application/json'
+        Accept: "application/json",
       },
       body: params,
     });
@@ -30,11 +30,13 @@ export async function onRequest(context) {
     const data = await response.json();
 
     if (data.error) {
-      return new Response(`GitHub API Error: ${data.error} - ${data.error_description}`, { status: 500 });
+      return new Response(`GitHub API Error: ${data.error} - ${data.error_description}`, {
+        status: 500,
+      });
     }
 
     const token = data.access_token;
-    const provider = 'github';
+    const provider = "github";
 
     const script = `
       <script>
@@ -52,7 +54,7 @@ export async function onRequest(context) {
     `;
 
     return new Response(script, {
-      headers: { 'Content-Type': 'text/html' },
+      headers: { "Content-Type": "text/html" },
     });
   } catch (err) {
     return new Response(`Server Error: ${err.message}`, { status: 500 });

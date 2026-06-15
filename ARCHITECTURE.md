@@ -6,14 +6,14 @@ Tento dokument popisuje technickou architekturu webové prezentace Restaurace Na
 
 ## Technologický stack
 
-| Vrstva | Technologie | Verze |
-|---|---|---|
-| Framework | Astro | 5.x |
-| Styling | Tailwind CSS | 4.x |
-| TypeScript | Strict mode | 5.7 |
-| CMS | Decap CMS | 3.x |
-| Správce balíčků | pnpm | 9+ |
-| Runtime | Node.js | 20 LTS |
+| Vrstva          | Technologie  | Verze  |
+| --------------- | ------------ | ------ |
+| Framework       | Astro        | 5.x    |
+| Styling         | Tailwind CSS | 4.x    |
+| TypeScript      | Strict mode  | 5.7    |
+| CMS             | Decap CMS    | 3.x    |
+| Správce balíčků | pnpm         | 9+     |
+| Runtime         | Node.js      | 20 LTS |
 
 ## Adresářová struktura
 
@@ -80,23 +80,28 @@ Tento dokument popisuje technickou architekturu webové prezentace Restaurace Na
 ## Klíčové komponenty
 
 ### BaseHead
+
 Injektuje do `<head>`:
+
 - Meta tagy (title, description, canonical, OG, Twitter Card)
 - Font preload
 - JSON-LD strukturovaná data (LocalBusiness)
-- CSP hlavičky (via _headers na úrovni serveru)
+- CSP hlavičky (via \_headers na úrovni serveru)
 
 ### Nav
+
 - Sticky navigace s `aria-expanded`, `aria-controls` pro přístupný mobile hamburger
 - Escape key handler pro zavření menu
 - Deklarativní `aria-[current]` pro zvýraznění aktivní stránky
 
 ### Footer
+
 - Otevírací doba, kontakt, adresa
 - Povinný právní blok (IČO, DIČ, registrovaná adresa)
 - Odkaz na Zásady ochrany osobních údajů
 
 ### Layout
+
 - Skeleton HTML5 s `lang="cs"`, skip-to-content link
 - Obalení `<Nav />`, `<slot />`, `<Footer />`
 
@@ -112,6 +117,7 @@ Injektuje do `<head>`:
 ## CMS
 
 Decap CMS na `/admin/` umožňuje správu:
+
 1. **Denní menu** — datum, polévka, hlavní jídla s cenami a alergeny
 2. **Jídelní lístek** — kategorie, název, popis, cena, alergeny, pořadí
 

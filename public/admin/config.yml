@@ -44,7 +44,12 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Kategorie", name: "category", widget: "select", options: ["polevky", "hlavni-jidla", "dezerty", "napoje"] }
+      - {
+          label: "Kategorie",
+          name: "category",
+          widget: "select",
+          options: ["polevky", "hlavni-jidla", "dezerty", "napoje"],
+        }
       - { label: "Název", name: "name", widget: "string" }
       - { label: "Popis", name: "description", widget: "text", required: false }
       - { label: "Cena (Kč)", name: "price", widget: "number", value_type: "int" }

@@ -17,11 +17,7 @@ const categories = [
 const pageDescription = `Jídelní lístek ${siteConfig.name} — stálá nabídka polévek, hlavních jídel, dezertů a nápojů.`;
 ---
 
-<Layout
-  title="Jídelní lístek"
-  description={pageDescription}
-  canonical="/jidelnistek/"
->
+<Layout title="Jídelní lístek" description={pageDescription} canonical="/jidelnistek/">
   <section class="section-padding relative bg-organic">
     <div class="bg-blob-right"></div>
     <BackgroundDoodles />
@@ -34,70 +30,67 @@ const pageDescription = `Jídelní lístek ${siteConfig.name} — stálá nabíd
           Jídelní lístek
         </h1>
         <p class="text-warm-brown/70 mt-4 max-w-lg mx-auto">
-          Objevte naši stálou nabídku poctivých jídel připravovaných z čerstvých
-          surovin s důrazem na tradiční českou kuchyni.
+          Objevte naši stálou nabídku poctivých jídel připravovaných z čerstvých surovin s důrazem
+          na tradiční českou kuchyni.
         </p>
       </div>
 
       <div class="space-y-20">
-        {categories.map((cat) => {
-          const items = sorted.filter((item) => item.data.category === cat.key);
-          if (items.length === 0) return null;
+        {
+          categories.map((cat) => {
+            const items = sorted.filter((item) => item.data.category === cat.key);
+            if (items.length === 0) return null;
 
-          return (
-            <div id={cat.key}>
-              <div class="flex items-center gap-3 mb-8">
-                <span class="text-3xl" aria-hidden="true">{cat.icon}</span>
-                <h2 class="font-heading text-2xl md:text-3xl font-semibold text-warm-brown">
-                  {cat.label}
-                </h2>
+            return (
+              <div id={cat.key}>
+                <div class="flex items-center gap-3 mb-8">
+                  <span class="text-3xl" aria-hidden="true">
+                    {cat.icon}
+                  </span>
+                  <h2 class="font-heading text-2xl md:text-3xl font-semibold text-warm-brown">
+                    {cat.label}
+                  </h2>
+                </div>
+                <ul class="space-y-0 max-w-3xl">
+                  {items.map((item, idx) => (
+                    <li
+                      class={`flex justify-between items-start gap-5 p-5 md:p-6 ${
+                        idx % 2 === 0 ? "bg-[#f3f0e8]/30" : "bg-white/40"
+                      } rounded-xl`}
+                    >
+                      <div class="flex-1">
+                        <h3 class="font-semibold text-warm-brown text-lg">{item.data.name}</h3>
+                        {item.data.description && (
+                          <p class="text-warm-brown/60 text-sm mt-1 leading-relaxed max-w-lg">
+                            {item.data.description}
+                          </p>
+                        )}
+                        {item.data.allergens && (
+                          <p class="text-xs text-warm-brown/40 mt-2">
+                            Alergeny: {item.data.allergens}
+                          </p>
+                        )}
+                      </div>
+                      <div class="flex items-center gap-3 shrink-0 pt-1">
+                        <span class="hidden sm:block flex-1 border-b border-dotted border-stone-300 min-w-[2rem] self-center" />
+                        <span class="font-heading font-bold text-xl text-terracotta whitespace-nowrap">
+                          {item.data.price} Kč
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul class="space-y-0 max-w-3xl">
-                {items.map((item, idx) => (
-                  <li
-                    class={`flex justify-between items-start gap-5 p-5 md:p-6 ${
-                      idx % 2 === 0 ? "bg-[#f3f0e8]/30" : "bg-white/40"
-                    } rounded-xl`}
-                  >
-                    <div class="flex-1">
-                      <h3 class="font-semibold text-warm-brown text-lg">
-                        {item.data.name}
-                      </h3>
-                      {item.data.description && (
-                        <p class="text-warm-brown/60 text-sm mt-1 leading-relaxed max-w-lg">
-                          {item.data.description}
-                        </p>
-                      )}
-                      {item.data.allergens && (
-                        <p class="text-xs text-warm-brown/40 mt-2">
-                          Alergeny: {item.data.allergens}
-                        </p>
-                      )}
-                    </div>
-                    <div class="flex items-center gap-3 shrink-0 pt-1">
-                      <span class="hidden sm:block flex-1 border-b border-dotted border-stone-300 min-w-[2rem] self-center"></span>
-                      <span class="font-heading font-bold text-xl text-terracotta whitespace-nowrap">
-                        {item.data.price} Kč
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          );
-        })}
+            );
+          })
+        }
       </div>
 
       <!-- Allergen Legend -->
       <div class="max-w-2xl mx-auto mt-16 text-xs text-warm-brown/40 space-y-1">
         <p class="font-medium text-warm-brown/50">Legenda alergenů:</p>
-        <p>
-          1 — Obiloviny obsahující lepek, 3 — Vejce, 4 — Ryby, 7 — Mléko,
-          9 — Celer
-        </p>
-        <p class="mt-2 italic">
-          Změna jídelníčku vyhrazena. Ceny jsou uvedeny v Kč.
-        </p>
+        <p>1 — Obiloviny obsahující lepek, 3 — Vejce, 4 — Ryby, 7 — Mléko, 9 — Celer</p>
+        <p class="mt-2 italic">Změna jídelníčku vyhrazena. Ceny jsou uvedeny v Kč.</p>
       </div>
     </div>
   </section>

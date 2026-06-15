@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://restauracenatruhlarne.cz/sitemap-index.xml

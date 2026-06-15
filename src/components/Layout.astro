@@ -14,14 +14,7 @@ export interface Props {
   containerClass?: string;
 }
 
-const {
-  title,
-  description,
-  ogImage,
-  canonical,
-  noindex = false,
-  containerClass = "",
-} = Astro.props;
+const { title, description, ogImage, canonical, noindex = false } = Astro.props;
 ---
 
 <!doctype html>

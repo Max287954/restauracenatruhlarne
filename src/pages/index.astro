@@ -10,11 +10,7 @@ const mapsEmbedUrl =
   "https://maps.google.com/maps?q=1.%20M%C3%A1je%20178,%2035709%20Habartov,%20CZ&t=&z=16&ie=UTF8&iwloc=&output=embed";
 ---
 
-<Layout
-  title="Domů"
-  description={pageDescription}
-  canonical="/"
->
+<Layout title="Domů" description={pageDescription} canonical="/">
   <!-- Hero Section -->
   <section class="relative bg-organic min-h-[85vh] flex items-center">
     <div class="bg-blob-left"></div>
@@ -24,23 +20,23 @@ const mapsEmbedUrl =
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <!-- Left: Text -->
         <div class="max-w-xl">
-          <span class="inline-block text-terracotta font-medium text-sm uppercase tracking-widest mb-4">
+          <span
+            class="inline-block text-terracotta font-medium text-sm uppercase tracking-widest mb-4"
+          >
             Vítejte v Habartově
           </span>
-          <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-warm-brown leading-tight mb-6">
+          <h1
+            class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-warm-brown leading-tight mb-6"
+          >
             Restaurace<br class="sm:hidden" /> Na Truhlárně
           </h1>
           <p class="text-lg md:text-xl text-warm-brown/70 max-w-lg mb-10 leading-relaxed">
-            Poctivá česká kuchyně, čepované pivo a příjemné posezení v srdci
-            Habartova. Vaříme s láskou z čerstvých surovin každý den.
+            Poctivá česká kuchyně, čepované pivo a příjemné posezení v srdci Habartova. Vaříme s
+            láskou z čerstvých surovin každý den.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/denni-menu/" class="btn-primary text-lg">
-              Dnešní denní menu
-            </a>
-            <a href="/jidelnistek/" class="btn-secondary text-lg">
-              Jídelní lístek
-            </a>
+            <a href="/denni-menu/" class="btn-primary text-lg"> Dnešní denní menu </a>
+            <a href="/jidelnistek/" class="btn-secondary text-lg"> Jídelní lístek </a>
           </div>
         </div>
         <!-- Right: Hero Image -->
@@ -64,26 +60,23 @@ const mapsEmbedUrl =
     <div class="section-container relative z-10">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <span class="text-olive font-medium text-sm uppercase tracking-widest">
-            O nás
-          </span>
+          <span class="text-olive font-medium text-sm uppercase tracking-widest"> O nás </span>
           <h2 class="text-3xl md:text-4xl font-heading font-bold text-warm-brown mt-3 mb-6">
             Vítejte u nás
           </h2>
           <p class="text-warm-brown/70 leading-relaxed mb-4">
-            Restaurace Na Truhlárně je místo, kde se setkává tradice s moderním
-            přístupem ke gastronomii. Majitel a šéfkuchař Jaroslav Šindelář se
-            svým týmem denně připravuje poctivá jídla z čerstvých, převážně
-            lokálních surovin.
+            Restaurace Na Truhlárně je místo, kde se setkává tradice s moderním přístupem ke
+            gastronomii. Majitel a šéfkuchař Jaroslav Šindelář se svým týmem denně připravuje
+            poctivá jídla z čerstvých, převážně lokálních surovin.
           </p>
           <p class="text-warm-brown/70 leading-relaxed mb-4">
-            Naše kuchyně staví na osvědčených českých recepturách, které
-            doplňujeme sezónními specialitami. Vždy u nás najdete širokou
-            nabídku hotových jídel, denní menu a perfektně ošetřené pivo.
+            Naše kuchyně staví na osvědčených českých recepturách, které doplňujeme sezónními
+            specialitami. Vždy u nás najdete širokou nabídku hotových jídel, denní menu a perfektně
+            ošetřené pivo.
           </p>
           <p class="text-warm-brown/70 leading-relaxed">
-            Ať už se stavíte na oběd, večeři, nebo jen na pivo s přáteli, u nás
-            se budete cítit jako doma.
+            Ať už se stavíte na oběd, večeři, nebo jen na pivo s přáteli, u nás se budete cítit jako
+            doma.
           </p>
         </div>
         <!-- Masonry Image Grid for "O nás" -->
@@ -146,8 +139,21 @@ const mapsEmbedUrl =
             <p>{siteConfig.address.postalCode} {siteConfig.address.city}</p>
           </address>
           <p class="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-terracotta">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="text-terracotta"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              ></path>
             </svg>
             <a
               href={`tel:${siteConfig.owner.phone}`}
@@ -157,9 +163,20 @@ const mapsEmbedUrl =
             </a>
           </p>
           <p class="flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-terracotta">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="text-terracotta"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
             </svg>
             <a
               href={`mailto:${siteConfig.owner.email}`}
@@ -171,11 +188,13 @@ const mapsEmbedUrl =
           <div>
             <h4 class="font-medium text-warm-brown mb-1">Otevírací doba</h4>
             <ul class="text-sm text-warm-brown/70 space-y-0.5">
-              {Object.entries(siteConfig.openingHours).map(([_, day]) => (
-                <li>
-                  {day.label}: {day.open}–{day.close}
-                </li>
-              ))}
+              {
+                Object.entries(siteConfig.openingHours).map(([_, day]) => (
+                  <li>
+                    {day.label}: {day.open}–{day.close}
+                  </li>
+                ))
+              }
             </ul>
           </div>
         </div>
@@ -188,8 +207,7 @@ const mapsEmbedUrl =
             style="border:0"
             allowfullscreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>

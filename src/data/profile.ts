@@ -11,6 +11,7 @@ export const siteConfig = {
     ico: "12345678",
     dic: "[doplňte DIČ]",
     registeredAddress: "1. Máje 178, 35709 Habartov, CZ",
+    phone: "+420 775 040 760",
     email: "sindelarjaroslav@seznam.cz",
   },
 

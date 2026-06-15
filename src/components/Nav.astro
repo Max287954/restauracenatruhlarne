@@ -9,6 +9,21 @@ const navLinks = [
 ---
 
 <header class="sticky top-0 z-50 bg-cream/80 backdrop-blur-md border-b border-cream-dark">
+  <!-- Top bar with phone -->
+  <div class="bg-warm-brown-dark text-cream/80 text-xs hidden md:block">
+    <div class="section-container flex items-center justify-end gap-6 py-1.5">
+      <a
+        href={`tel:${siteConfig.owner.phone}`}
+        class="flex items-center gap-1.5 hover:text-terracotta-light transition-colors"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        {siteConfig.owner.phone}
+      </a>
+    </div>
+  </div>
+
   <nav
     class="section-container flex items-center justify-between h-16 lg:h-20"
     aria-label="Hlavní navigace"
@@ -64,6 +79,18 @@ const navLinks = [
           </a>
         </li>
       ))}
+      <li>
+        <a
+          href={`tel:${siteConfig.owner.phone}`}
+          class="flex items-center gap-1.5 text-sm text-warm-brown hover:text-terracotta transition-colors"
+          title="Zavolejte nám"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          {siteConfig.owner.phone}
+        </a>
+      </li>
       <li>
         <a href="/#kontakt" class="btn-primary text-sm">
           Kontakt
@@ -128,6 +155,17 @@ const navLinks = [
           </a>
         </li>
       ))}
+      <li>
+        <a
+          href={`tel:${siteConfig.owner.phone}`}
+          class="flex items-center gap-2 py-2 text-base font-medium text-warm-brown hover:text-terracotta transition-colors"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          {siteConfig.owner.phone}
+        </a>
+      </li>
       <li>
         <a href="/#kontakt" class="btn-primary text-sm w-full text-center mt-2">
           Kontakt

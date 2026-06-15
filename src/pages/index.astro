@@ -1,6 +1,7 @@
 ---
 import Layout from "@components/Layout.astro";
 import { siteConfig } from "@data/profile";
+import BackgroundDoodles from "@components/BackgroundDoodles.astro";
 
 const pageDescription = `${siteConfig.name} v Habartově — poctivá česká kuchyně, denní menu a příjemné posezení. Otevřeno každý den.`;
 ---
@@ -14,25 +15,42 @@ const pageDescription = `${siteConfig.name} v Habartově — poctivá česká ku
   <section class="relative overflow-hidden bg-organic min-h-[85vh] flex items-center">
     <div class="bg-blob-left"></div>
     <div class="bg-blob-right"></div>
+    <BackgroundDoodles />
     <div class="section-container relative z-10 py-20 md:py-32 w-full">
-      <div class="max-w-3xl mx-auto text-center">
-        <span class="inline-block text-terracotta font-medium text-sm uppercase tracking-widest mb-4">
-          Vítejte v Habartově
-        </span>
-        <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-warm-brown leading-tight mb-6">
-          Restaurace<br class="sm:hidden" /> Na Truhlárně
-        </h1>
-        <p class="text-lg md:text-xl text-warm-brown/70 max-w-xl mx-auto mb-10 leading-relaxed">
-          Poctivá česká kuchyně, čepované pivo a příjemné posezení v srdci
-          Habartova. Vaříme s láskou z čerstvých surovin každý den.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/denni-menu/" class="btn-primary text-lg">
-            Dnešní denní menu
-          </a>
-          <a href="/jidelnistek/" class="btn-secondary text-lg">
-            Jídelní lístek
-          </a>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left: Text -->
+        <div class="max-w-xl">
+          <span class="inline-block text-terracotta font-medium text-sm uppercase tracking-widest mb-4">
+            Vítejte v Habartově
+          </span>
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-warm-brown leading-tight mb-6">
+            Restaurace<br class="sm:hidden" /> Na Truhlárně
+          </h1>
+          <p class="text-lg md:text-xl text-warm-brown/70 max-w-lg mb-10 leading-relaxed">
+            Poctivá česká kuchyně, čepované pivo a příjemné posezení v srdci
+            Habartova. Vaříme s láskou z čerstvých surovin každý den.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/denni-menu/" class="btn-primary text-lg">
+              Dnešní denní menu
+            </a>
+            <a href="/jidelnistek/" class="btn-secondary text-lg">
+              Jídelní lístek
+            </a>
+          </div>
+        </div>
+        <!-- Right: Hero Image -->
+        <div class="hidden lg:block">
+          <img
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop&q=80"
+            alt="Vnitřek restaurace s prostřenými stoly"
+            width="800"
+            height="600"
+            loading="lazy"
+            decoding="async"
+            class="rounded-[2rem] shadow-2xl object-cover w-full h-auto"
+            style="aspect-ratio: 4/3;"
+          />
         </div>
       </div>
     </div>
@@ -41,6 +59,7 @@ const pageDescription = `${siteConfig.name} v Habartově — poctivá česká ku
   <!-- About Section -->
   <section class="section-padding relative overflow-hidden" id="o-nas">
     <div class="bg-blob-right" style="top: 10%; left: auto; right: -5%"></div>
+    <BackgroundDoodles />
     <div class="section-container relative z-10">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -66,45 +85,49 @@ const pageDescription = `${siteConfig.name} v Habartově — poctivá česká ku
             se budete cítit jako doma.
           </p>
         </div>
+        <!-- Masonry Image Grid for "O nás" -->
         <div class="relative">
-          <div
-            class="aspect-[4/3] rounded-2xl bg-cream-dark border border-cream-dark flex items-center justify-center overflow-hidden"
-          >
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 80 80"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              class="text-warm-brown/25"
-              aria-hidden="true"
-            >
-              <circle
-                cx="40"
-                cy="40"
-                r="38"
-                stroke="currentColor"
-                stroke-width="2"
-              />
-              <path
-                d="M24 48C24 48 28 32 40 32C52 32 56 48 56 48"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-              <path
-                d="M28 40L36 32"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-              <path
-                d="M52 40L44 32"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
+          <div class="grid grid-cols-2 gap-3">
+            <img
+              src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop&q=80"
+              alt="Grilované maso s bylinkami"
+              width="400"
+              height="300"
+              loading="lazy"
+              decoding="async"
+              class="rounded-2xl shadow-lg object-cover w-full h-full col-span-1"
+              style="aspect-ratio: 4/3;"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1579027989536-b7b1f875659b?w=400&h=300&fit=crop&q=80"
+              alt="Čepované pivo"
+              width="400"
+              height="300"
+              loading="lazy"
+              decoding="async"
+              class="rounded-2xl shadow-lg object-cover w-full h-full col-span-1"
+              style="aspect-ratio: 4/3;"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1551218808-94e8940c51ed?w=400&h=300&fit=crop&q=80"
+              alt="Plný talíř českého jídla"
+              width="400"
+              height="300"
+              loading="lazy"
+              decoding="async"
+              class="rounded-2xl shadow-lg object-cover w-full h-full col-span-1"
+              style="aspect-ratio: 4/3;"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&h=300&fit=crop&q=80"
+              alt="Steak s přílohou"
+              width="400"
+              height="300"
+              loading="lazy"
+              decoding="async"
+              class="rounded-2xl shadow-lg object-cover w-full h-full col-span-1"
+              style="aspect-ratio: 4/3;"
+            />
           </div>
         </div>
       </div>
@@ -161,6 +184,7 @@ const pageDescription = `${siteConfig.name} v Habartově — poctivá česká ku
   <!-- Google Maps & Contact -->
   <section class="section-padding relative overflow-hidden" id="kontakt">
     <div class="bg-blob-left"></div>
+    <BackgroundDoodles />
     <div class="section-container relative z-10">
       <div class="text-center mb-12">
         <span class="text-olive font-medium text-sm uppercase tracking-widest">
@@ -179,7 +203,22 @@ const pageDescription = `${siteConfig.name} v Habartově — poctivá česká ku
             <p>{siteConfig.address.street}</p>
             <p>{siteConfig.address.postalCode} {siteConfig.address.city}</p>
           </address>
-          <p>
+          <p class="flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-terracotta">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <a
+              href={`tel:${siteConfig.owner.phone}`}
+              class="text-terracotta hover:text-terracotta-dark underline underline-offset-2 transition-colors"
+            >
+              {siteConfig.owner.phone}
+            </a>
+          </p>
+          <p class="flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="text-terracotta">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
             <a
               href={`mailto:${siteConfig.owner.email}`}
               class="text-terracotta hover:text-terracotta-dark underline underline-offset-2 transition-colors"
@@ -198,7 +237,7 @@ const pageDescription = `${siteConfig.name} v Habartově — poctivá česká ku
             </ul>
           </div>
         </div>
-        <div class="rounded-2xl overflow-hidden shadow-md h-[350px] md:h-full min-h-[350px]">
+        <div class="rounded-[2rem] overflow-hidden shadow-xl h-[350px] md:h-full min-h-[350px]">
           <iframe
             title="Restaurace Na Truhlárně — mapa"
             src={siteConfig.googleMapsEmbedUrl}

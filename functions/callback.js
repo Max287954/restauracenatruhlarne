@@ -1,27 +1,30 @@
 export async function onRequest(context) {
   try {
-    const client_id = context.env.OAUTH_GITHUB_CLIENT_ID;
-    const client_secret = context.env.OAUTH_GITHUB_CLIENT_SECRET;
+    const client_id = (context.env.OAUTH_GITHUB_CLIENT_ID || "").trim();
+    const client_secret = (context.env.OAUTH_GITHUB_CLIENT_SECRET || "").trim();
 
     if (!client_id || !client_secret) {
-      return new Response("Error: Missing OAUTH_GITHUB_CLIENT_ID or OAUTH_GITHUB_CLIENT_SECRET in environment variables.", { status: 500 });
+      return new Response("Error: Missing env vars.", { status: 500 });
     }
 
     const url = new URL(context.request.url);
     const code = url.searchParams.get('code');
 
     if (!code) {
-      return new Response("Error: No authorization code returned from GitHub.", { status: 400 });
+      return new Response("Error: No code.", { status: 400 });
     }
+
+    const params = new URLSearchParams();
+    params.append('client_id', client_id);
+    params.append('client_secret', client_secret);
+    params.append('code', code);
 
     const response = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'User-Agent': 'Cloudflare-Pages-CMS-Auth'
+        'Accept': 'application/json'
       },
-      body: JSON.stringify({ client_id, client_secret, code }),
+      body: params,
     });
 
     const data = await response.json();
@@ -41,6 +44,7 @@ export async function onRequest(context) {
             message.origin
           );
           window.removeEventListener("message", receiveMessage, false);
+          window.close();
         }
         window.addEventListener("message", receiveMessage, false);
         window.opener.postMessage("authorizing:${provider}", "*");
@@ -51,6 +55,6 @@ export async function onRequest(context) {
       headers: { 'Content-Type': 'text/html' },
     });
   } catch (err) {
-    return new Response(`Server Error in callback.js: ${err.message}`, { status: 500 });
+    return new Response(`Server Error: ${err.message}`, { status: 500 });
   }
 }
